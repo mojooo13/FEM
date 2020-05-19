@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/appLayout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:stretchColumns="*"
+    android:shrinkColumns="*">
+
+    <TableRow>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sensor Data App"
+            android:gravity="center"
+            android:layout_span="3"
+            />
+
+    </TableRow>
+
+    <TableRow>
+        <Button
+            android:id="@+id/startstop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START / STOP"
+            android:layout_span="3"
+            />
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="264dp"
+            android:text="Hier kommt die Live-Anzeige hin"
+            android:gravity="center"
+            android:layout_span="3"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="FEEDBACK"
+            android:gravity="center"
+            android:layout_span="3"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x-Achse"
+            android:layout_weight="1"
+            android:background="#00FF00"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="y-Achse"
+            android:layout_weight="1"
+            android:background="#FFFF00"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="z-Achse"
+            android:layout_weight="1"
+            android:background="#FF0000"
+            android:gravity="center"
+            />
+    </TableRow>
+    <TableRow>
+        <Button
+            android:id="@+id/stats_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STATISTIKEN"
+            android:layout_span="3"
+            />
+    </TableRow>
+
+</TableLayout>
