@@ -24,7 +24,7 @@
 
     <TableRow>
         <Button
-            android:id="@+id/startstop"
+            android:id="@+id/startstopButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="START / STOP"
@@ -54,7 +54,7 @@
     </TableRow>
     <TableRow>
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/x_accTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="x-Achse"
@@ -63,7 +63,7 @@
             android:gravity="center"
             />
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/y_accTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="y-Achse"
@@ -72,7 +72,7 @@
             android:gravity="center"
             />
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/z_accTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="z-Achse"
