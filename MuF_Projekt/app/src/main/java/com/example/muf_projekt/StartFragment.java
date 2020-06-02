@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavHostController;
@@ -17,11 +18,12 @@ import androidx.navigation.Navigation;
 
 public class StartFragment extends Fragment implements View.OnClickListener{
     private MainViewModel mainViewModel;
+    private Observer<AccelerationInformation> observer;
     Button startstopButton;
     TextView x_accTextView;
     TextView y_accTextView;
     TextView z_accTextView;
-    boolean startedMeasurement = false;
+
 
     @Nullable
     @Override
@@ -29,7 +31,6 @@ public class StartFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_start, container, false);
 
         startstopButton = (Button) view.findViewById(R.id.startstopButton);
-
         startstopButton.setOnClickListener(this);
 
         mainViewModel = new ViewModelProvider(
@@ -48,15 +49,15 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.startstopButton:
-                if(startedMeasurement){
+                if(isObserverRunning()){
+                    //Observer is running
                     startstopButton.setText("Messung starten");
-                    startedMeasurement = false;
+                    startstopSensorObservation();
                 }
                 else{
+                    //Observer is not running
                     startstopButton.setText("Messung beenden");
                     startstopSensorObservation();
-                    startedMeasurement = true;
-
                 }
                 break;
 
@@ -66,16 +67,25 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     }
 
     public void startstopSensorObservation(){
-        if(startedMeasurement){
-            mainViewModel.accelerationLiveData.removeObservers(getViewLifecycleOwner());
-        }
-        else {
-            mainViewModel.accelerationLiveData.observe(getViewLifecycleOwner(), (acclerationInformation) -> {
+        if(observer == null){
+            observer = (acclerationInformation) -> {
                 x_accTextView.setText(acclerationInformation.getX()+"m/s^2");
                 y_accTextView.setText(acclerationInformation.getY()+"m/s^2");
                 z_accTextView.setText(acclerationInformation.getZ()+"m/s^2");
-            });
+            };
+            mainViewModel.accelerationLiveData.observe(getViewLifecycleOwner(), observer);
+
         }
+        else {
+            mainViewModel.accelerationLiveData.removeObserver(observer);
+            observer = null; // reset state
+        }
+    }
+
+    public boolean isObserverRunning(){
+        if(observer == null)
+            return false;
+        return true;
     }
 
     @Override
