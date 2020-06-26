@@ -2,11 +2,32 @@ package com.example.muf_projekt;
 
 import android.hardware.Sensor;
 
+import com.github.mikephil.charting.data.LineData;
+
 public class AccelerationInformation {
     private Sensor sensor;
     private float x;
     private float y;
     private float z;
+    private float timestamp;
+    private LineData lineData;
+
+
+    public LineData getLineData() {
+        return lineData;
+    }
+
+    public void setLineData(LineData lineData) {
+        this.lineData = lineData;
+    }
+
+    public void setTimestamp(float timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public float getTimestamp() {
+        return timestamp;
+    }
 
     public Sensor getSensor() {
         return sensor;

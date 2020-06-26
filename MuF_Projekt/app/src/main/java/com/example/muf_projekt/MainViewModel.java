@@ -11,6 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class MainViewModel extends AndroidViewModel {
     final LiveData<AccelerationInformation> accelerationLiveData;
 
@@ -25,6 +33,9 @@ public class MainViewModel extends AndroidViewModel {
         private Sensor accelerometer;
         private Sensor gravitySensor;
         private float[] gravity;
+
+
+
         private SensorEventListener listener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
@@ -33,7 +44,13 @@ public class MainViewModel extends AndroidViewModel {
                         float[] values = removeGravity(gravity, event.values);
                         accelerationInformation.setXYZ(values[0], values[1], values[2]);
                         accelerationInformation.setSensor(event.sensor);
+                        accelerationInformation.setTimestamp((new Date()).getTime() + (event.timestamp - System.nanoTime()) / 1000000L);
                         setValue(accelerationInformation);
+
+                        //LineDataSet dataSet = new LineDataSet(new Entry(accelerationInformation.getTimestamp(), accelerationInformation.getX(), "Label"); // add entries to dataset
+                        //LineData lineData = new LineData(dataSet);
+                        //accelerationInformation.setLineData(lineData);
+
                         break;
                     case Sensor.TYPE_GRAVITY:
                         gravity = event.values;

@@ -32,16 +32,13 @@
             />
     </TableRow>
 
-    <TableRow>
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="264dp"
-            android:text="Hier kommt die Live-Anzeige hin"
-            android:gravity="center"
-            android:layout_span="3"
-            />
-    </TableRow>
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/liveChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
     <TableRow>
         <TextView
             android:id="@+id/textView6"
