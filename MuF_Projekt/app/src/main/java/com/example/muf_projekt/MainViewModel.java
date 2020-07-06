@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 public class MainViewModel extends AndroidViewModel {
-    final LiveData<AccelerationInformation> accelerationLiveData;
+    public final LiveData<AccelerationInformation> accelerationLiveData;
 
     public MainViewModel(@NonNull Application application) {
         super(application);

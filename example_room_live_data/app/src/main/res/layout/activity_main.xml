@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="2"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/user_input_fragment"
+        android:name="com.example.example_room_live_data.fragment.UserInputFragment"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_userinput"
+        android:layout_width="match_parent"
+        android:layout_height="0dip" />
+
+    <fragment
+        android:id="@+id/user_display_fragment"
+        android:name="com.example.example_room_live_data.fragment.UserDisplayFragment"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_userdisplay"
+        android:layout_width="match_parent"
+        android:layout_height="0dip" />
+</LinearLayout>

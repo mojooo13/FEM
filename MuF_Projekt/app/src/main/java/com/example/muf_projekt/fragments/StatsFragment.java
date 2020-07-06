@@ -1,4 +1,4 @@
-package com.example.muf_projekt;
+package com.example.muf_projekt.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.muf_projekt.R;
+import com.example.muf_projekt.fragments.StatsFragmentArgs;
 
 public class StatsFragment extends Fragment {
     @Nullable

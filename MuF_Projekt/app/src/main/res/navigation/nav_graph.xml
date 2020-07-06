@@ -7,7 +7,7 @@
     <fragment
         tools:layout="@layout/fragment_start"
         android:id="@+id/startFragment"
-        android:name="com.example.muf_projekt.StartFragment"
+        android:name="com.example.muf_projekt.fragments.StartFragment"
         android:label="StartFragment" >
         <action
             android:id="@+id/action_startFragment_to_statsFragment"
@@ -17,7 +17,7 @@
     <fragment
         tools:layout="@layout/fragment_stats"
         android:id="@+id/statsFragment"
-        android:name="com.example.muf_projekt.StatsFragment"
+        android:name="com.example.muf_projekt.fragments.StatsFragment"
         android:label="StatsFragment" >
         <argument
             android:name="displayString"

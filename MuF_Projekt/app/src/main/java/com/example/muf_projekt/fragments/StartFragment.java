@@ -1,4 +1,4 @@
-package com.example.muf_projekt;
+package com.example.muf_projekt.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +17,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavHostController;
 import androidx.navigation.Navigation;
 
+import com.example.muf_projekt.AccelerationInformation;
+import com.example.muf_projekt.MainViewModel;
+import com.example.muf_projekt.R;
+import com.example.muf_projekt.fragments.StartFragmentDirections;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
