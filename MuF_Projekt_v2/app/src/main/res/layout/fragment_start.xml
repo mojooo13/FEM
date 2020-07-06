@@ -78,6 +78,34 @@
             android:gravity="center"
             />
     </TableRow>
+
+    <TableRow>
+        <TextView
+            android:id="@+id/x_max_accTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x Max Value"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/y_max_accTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="y Max Value"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/z_max_accTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="z Max Value"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+    </TableRow>
+
     <TableRow>
         <Button
             android:id="@+id/stats_button"

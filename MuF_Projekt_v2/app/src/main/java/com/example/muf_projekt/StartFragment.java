@@ -35,6 +35,10 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     TextView x_accTextView;
     TextView y_accTextView;
     TextView z_accTextView;
+    TextView x_max_accTextView;
+    TextView y_max_accTextView;
+    TextView z_max_accTextView;
+
 
     LineChart lineChart;
     ArrayList<Entry> x_accData;
@@ -42,6 +46,9 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     ArrayList<Entry> z_accData;
     ArrayList<ILineDataSet> dataSets;
     int time_count = 0;
+
+    float x_acc, y_acc, z_acc;
+    float x_max = 0, y_max = 0, z_max = 0;
 
     private Database database;
 
@@ -62,6 +69,10 @@ public class StartFragment extends Fragment implements View.OnClickListener{
         x_accTextView = view.findViewById(R.id.x_accTextView);
         y_accTextView = view.findViewById(R.id.y_accTextView);
         z_accTextView = view.findViewById(R.id.z_accTextView);
+
+        x_max_accTextView = view.findViewById(R.id.x_max_accTextView);
+        y_max_accTextView = view.findViewById(R.id.y_max_accTextView);
+        z_max_accTextView = view.findViewById(R.id.z_max_accTextView);
 
         lineChart = (LineChart) view.findViewById(R.id.liveChart);
         lineChart.setBackgroundColor(Color.WHITE);
@@ -112,13 +123,19 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     public void startstopSensorObservation(){
         if(observer == null){
             observer = (acclerationInformation) -> {
-                x_accTextView.setText(acclerationInformation.getX()+"m/s^2");
-                y_accTextView.setText(acclerationInformation.getY()+"m/s^2");
-                z_accTextView.setText(acclerationInformation.getZ()+"m/s^2");
 
-                x_accData.add(new Entry(time_count, acclerationInformation.getX()));
-                y_accData.add(new Entry(time_count, acclerationInformation.getY()));
-                z_accData.add(new Entry(time_count, acclerationInformation.getZ()));
+                x_acc = acclerationInformation.getX();
+                y_acc = acclerationInformation.getY();
+                z_acc = acclerationInformation.getZ();
+
+
+                x_accTextView.setText(x_acc+"m/s^2");
+                y_accTextView.setText(y_acc+"m/s^2");
+                z_accTextView.setText(z_acc+"m/s^2");
+
+                x_accData.add(new Entry(time_count, x_acc));
+                y_accData.add(new Entry(time_count, y_acc));
+                z_accData.add(new Entry(time_count, z_acc));
                 time_count = time_count + 1;
 
                 LineDataSet x_lineDataSet = new LineDataSet(x_accData, "X-Acc");
@@ -140,8 +157,28 @@ public class StartFragment extends Fragment implements View.OnClickListener{
                 lineChart.setData(data);
                 lineChart.invalidate();
 
+                //Live Feedback
+
+                if(Math.abs(x_acc) > x_max){
+                    x_max = x_acc;
+                    x_max_accTextView.setText(x_max+"m/s^2");
+                }
+                if(Math.abs(y_acc) > y_max){
+                    y_max = y_acc;
+                    y_max_accTextView.setText(y_max+"m/s^2");
+                }
+                if(Math.abs(z_acc) > z_max){
+                    z_max = z_acc;
+                    z_max_accTextView.setText(z_max+"m/s^2");
+                }
+                else{
+                    //x_accTextView.setBackgroundColor(Color.WHITE);
+                    //y_accTextView.setBackgroundColor(Color.WHITE);
+                    //z_accTextView.setBackgroundColor(Color.WHITE);
+                }
+
                 //Datenbank
-                AccelerationInformation accelerationInformation = new AccelerationInformation(acclerationInformation.getX(), acclerationInformation.getY(), acclerationInformation.getZ());
+                AccelerationInformation accelerationInformation = new AccelerationInformation(x_acc, y_acc, z_acc);
                 database.getDatapointTable().insert(accelerationInformation);
                 List<AccelerationInformation> pointList = database.getDatapointTable().getItems();
                 int x  = 5;
