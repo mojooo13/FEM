@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_start"
+        android:id="@+id/startFragment"
+        android:name="com.example.muf_projekt.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_statsFragment"
+            app:destination="@id/statsFragment" />
+    </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_stats"
+        android:id="@+id/statsFragment"
+        android:name="com.example.muf_projekt.StatsFragment"
+        android:label="StatsFragment" >
+        <argument
+            android:name="displayString"
+            android:defaultValue="Default"
+            app:argType="string" />
+    </fragment>
+</navigation>
