@@ -13,7 +13,6 @@ import java.util.UUID;
 @Entity(tableName = "measurement_DB")
 public class AccelerationInformation {
 
-
     @PrimaryKey
     @NonNull
     private String id;
@@ -21,7 +20,6 @@ public class AccelerationInformation {
     private float timestamp;
 
     private float x;
-
     private float y;
     private float z;
 

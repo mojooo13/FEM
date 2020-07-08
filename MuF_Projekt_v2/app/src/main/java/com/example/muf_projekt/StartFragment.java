@@ -49,9 +49,7 @@ public class StartFragment extends Fragment implements View.OnClickListener{
 
     float x_acc, y_acc, z_acc;
     float x_max = 0, y_max = 0, z_max = 0;
-
-    private Database database;
-
+    float x_max_abs = 0, y_max_abs = 0, z_max_abs = 0;
 
     @Nullable
     @Override
@@ -85,9 +83,6 @@ public class StartFragment extends Fragment implements View.OnClickListener{
         y_accData = new ArrayList<Entry>();
         z_accData = new ArrayList<Entry>();
 
-        database = Room.databaseBuilder(getContext(), Database.class, "app_db_2")
-                .allowMainThreadQueries()
-                .build();
         getContext().deleteDatabase("app_db_2");
         File path = getContext().getDatabasePath("app_db_2");
 
@@ -158,18 +153,21 @@ public class StartFragment extends Fragment implements View.OnClickListener{
                 lineChart.invalidate();
 
                 //Live Feedback
+                x_max_abs = Math.abs(x_acc);
+                y_max_abs = Math.abs(y_acc);
+                z_max_abs = Math.abs(z_acc);
 
-                if(Math.abs(x_acc) > x_max){
-                    x_max = x_acc;
-                    x_max_accTextView.setText(x_max+"m/s^2");
+                if(x_max_abs > x_max){
+                    x_max = x_max_abs;
+                    x_max_accTextView.setText(x_max_abs + " m/s^2");
                 }
-                if(Math.abs(y_acc) > y_max){
-                    y_max = y_acc;
-                    y_max_accTextView.setText(y_max+"m/s^2");
+                if(y_max_abs > y_max){
+                    y_max = y_max_abs;
+                    y_max_accTextView.setText(y_max_abs + " m/s^2");
                 }
-                if(Math.abs(z_acc) > z_max){
-                    z_max = z_acc;
-                    z_max_accTextView.setText(z_max+"m/s^2");
+                if(z_max_abs > z_max){
+                    z_max = z_max_abs;
+                    z_max_accTextView.setText(z_max_abs + " m/s^2");
                 }
                 else{
                     //x_accTextView.setBackgroundColor(Color.WHITE);
@@ -179,9 +177,17 @@ public class StartFragment extends Fragment implements View.OnClickListener{
 
                 //Datenbank
                 AccelerationInformation accelerationInformation = new AccelerationInformation(x_acc, y_acc, z_acc);
-                database.getDatapointTable().insert(accelerationInformation);
-                List<AccelerationInformation> pointList = database.getDatapointTable().getItems();
-                int x  = 5;
+
+                final Database database = ((MUFApplication) getActivity().getApplication()).getDataBase();
+
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        database.getDatapointTable().insert(accelerationInformation);
+                    }
+                });
+
+                // List<AccelerationInformation> pointList = database.getDatapointTable().getItems();
 
             };
             mainViewModel.accelerationLiveData.observe(getViewLifecycleOwner(), observer);
@@ -206,8 +212,8 @@ public class StartFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View v) {
                 controller.navigate(StartFragmentDirections
-                                .actionStartFragmentToStatsFragment()
-                                .setDisplayString("ÜbergabeString")
+                        .actionStartFragmentToStatsFragment()
+                        .setDisplayString("Statistken & Messungen")
                 );
             }
         });
