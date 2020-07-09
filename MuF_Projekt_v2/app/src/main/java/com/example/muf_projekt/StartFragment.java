@@ -187,7 +187,7 @@ public class StartFragment extends Fragment implements View.OnClickListener{
                     }
                 });
 
-                // List<AccelerationInformation> pointList = database.getDatapointTable().getItems();
+                 List<AccelerationInformation> pointList = database.getDatapointTable().getItems();
 
             };
             mainViewModel.accelerationLiveData.observe(getViewLifecycleOwner(), observer);

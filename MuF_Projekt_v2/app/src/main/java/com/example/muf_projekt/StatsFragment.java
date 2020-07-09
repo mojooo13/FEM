@@ -27,13 +27,12 @@ public class StatsFragment extends Fragment {
 
     private Database database;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
 
-        Database database = ((MUFApplication) getActivity().getApplication()).getDataBase();
+        database = ((MUFApplication) getActivity().getApplication()).getDataBase();
 
         Bundle args = getArguments();
         StatsFragmentArgs statsFragmentArgs = null;
@@ -55,13 +54,15 @@ public class StatsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // TODO:
-        ListView lv = view.findViewById(R.id.listMeasurements);
+        //ListView lv = view.findViewById(R.id.listMeasurements);
         TextView xMean = view.findViewById(R.id.xMean);
         TextView yMean = view.findViewById(R.id.yMean);
         TextView zMean = view.findViewById(R.id.zMean);
         LineChart lc = view.findViewById(R.id.statsGraph);
 
-        List<AccelerationInformation> test = (List<AccelerationInformation>) database.getDatapointTable().getItemsAsLiveData();
+
+        //List<AccelerationInformation> test = (List<AccelerationInformation>) database.getDatapointTable().getItemsAsLiveData();
+
 
         database.getDatapointTable().getItemsAsLiveData().observe(this.getActivity(), accelerationInformation -> {
             List<AccelerationInformation> test2 = accelerationInformation;
