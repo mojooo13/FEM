@@ -75,7 +75,7 @@ public class AccelerationInformation {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.timestamp = 0;
+        this.timestamp = System.currentTimeMillis();
     }
 
     public AccelerationInformation(){

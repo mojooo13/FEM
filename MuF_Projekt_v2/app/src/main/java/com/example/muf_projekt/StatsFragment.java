@@ -1,6 +1,8 @@
 package com.example.muf_projekt;
 
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,21 +14,38 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StatsFragment extends Fragment {
 
+    PieChart pieChart;
+    MediaPlayer player;
     private Database database;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_stats, container, false);
+
+        pieChart = (PieChart)view.findViewById(R.id.piechart);
+        PieDataSet pieDataSet = new PieDataSet(getPieData(),"Time spend.");
+        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        PieData pieData = new PieData(pieDataSet);
+        pieChart.setData(pieData);
+        pieChart.animateXY(5000, 5000);
+        pieChart.setCenterTextColor(Color.BLACK);
+        pieChart.invalidate();
 
         database = ((MUFApplication) getActivity().getApplication()).getDataBase();
 
@@ -131,10 +150,13 @@ public class StatsFragment extends Fragment {
                 LineData dataZ = new LineData(dataSetZ);
 
                 lcX.setData(dataX);
+                lcX.animateXY(3000,3000);
                 lcX.invalidate();
                 lcY.setData(dataY);
+                lcX.animateXY(3000,3000);
                 lcY.invalidate();
                 lcZ.setData(dataZ);
+                lcX.animateXY(3000,3000);
                 lcZ.invalidate();
 
                 // Calc Min / Max
@@ -192,4 +214,41 @@ public class StatsFragment extends Fragment {
 
     }
 
+    public void playJeopardy() {
+        try {
+            if (player.isPlaying()) {
+                player.stop();
+                player.release();
+                player = new MediaPlayer();
+            }
+
+            AssetFileDescriptor descriptor = getActivity().getAssets().openFd("Jeopardy.mp3");
+            player.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+            descriptor.close();
+
+            player.prepare();
+            player.setVolume(1f, 1f);
+            player.setLooping(true);
+            player.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ArrayList getPieData(){
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(10, "Research"));
+        entries.add(new PieEntry(3, "Email"));
+        entries.add(new PieEntry(2, "Google Bugs"));
+        entries.add(new PieEntry(5, "Programming"));
+        entries.add(new PieEntry(3, "Beer"));
+        entries.add(new PieEntry(3, "Beer & programming"));
+        entries.add(new PieEntry(1, "Frustration"));
+        entries.add(new PieEntry(1, "Celebration"));
+
+        return entries;
+    }
+
 }
+
+

@@ -1,6 +1,8 @@
 package com.example.muf_projekt;
 
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +38,8 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     TextView x_max_accTextView;
     TextView y_max_accTextView;
     TextView z_max_accTextView;
+
+    MediaPlayer player = new MediaPlayer();
 
 
     LineChart lineChart;
@@ -94,10 +98,12 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                 if (isObserverRunning()) {
                     //Observer is running
                     startstopButton.setText("Messung starten");
+                    stopJeopardy();
                     startstopSensorObservation();
                 } else {
                     //Observer is not running
                     startstopButton.setText("Messung beenden");
+                    playJeopardy();
                     x_accData.clear();
                     y_accData.clear();
                     z_accData.clear();
@@ -249,5 +255,32 @@ public class StartFragment extends Fragment implements View.OnClickListener {
             }
         });
 
+    }
+
+    public void playJeopardy() {
+        try {
+            player = new MediaPlayer();
+
+            AssetFileDescriptor descriptor = getActivity().getAssets().openFd("Jeopardy.mp3");
+            player.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+            descriptor.close();
+
+            player.prepare();
+            player.setVolume(1f, 1f);
+            player.setLooping(true);
+            player.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void stopJeopardy() {
+        try {
+            player.stop();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

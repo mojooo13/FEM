@@ -7,7 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:stretchColumns="*"
-    android:shrinkColumns="*">
+    android:shrinkColumns="*"
+    android:background="@drawable/background">
 
     <TableRow>
 
@@ -47,6 +48,8 @@
             android:text="FEEDBACK"
             android:gravity="center"
             android:layout_span="4"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
             />
     </TableRow>
     <TableRow>
@@ -86,6 +89,8 @@
             android:text="Live: "
             android:layout_weight="1"
             android:gravity="right"
+            android:textStyle="bold"
+
             />
         <TextView
             android:id="@+id/x_accTextView"
@@ -124,6 +129,7 @@
             android:text="Max: "
             android:layout_weight="1"
             android:gravity="right"
+            android:textStyle="bold"
             />
         <TextView
             android:id="@+id/x_max_accTextView"

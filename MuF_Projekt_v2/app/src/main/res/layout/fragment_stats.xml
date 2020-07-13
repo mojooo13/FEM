@@ -10,9 +10,19 @@
         android:id="@+id/stats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Test"
+        android:text="Statistik und Messungen"
         android:layout_gravity="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/info2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scroll and zoom for a closer look."
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,6 +35,12 @@
             android:stretchColumns="*"
             android:shrinkColumns="*">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X-Acceleration:"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
             <!-- x-Achse -->
             <TableRow>
             <com.github.mikephil.charting.charts.LineChart
@@ -40,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="center"
-                    android:text="xMean: " />
+                    android:text="xMean: "
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/xMean"
                     android:layout_width="match_parent"
@@ -54,7 +71,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:gravity="center"
-                android:text="xMin: " />
+                android:text="xMin: "
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/xMin"
                 android:layout_width="match_parent"
@@ -68,7 +86,8 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
                     android:gravity="center"
-                    android:text="xMax: " />
+                    android:text="xMax: "
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/xMax"
                     android:layout_width="match_parent"
@@ -78,6 +97,12 @@
 
             <!-- y-Achse -->
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Y-Acceleration:"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
             <TableRow>
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/statsGraphY"
@@ -92,7 +117,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:gravity="center"
-                android:text="yMean: " />
+                android:text="yMean: "
+                android:textStyle="bold"/>
             <TextView
                 android:id="@+id/yMean"
                 android:layout_width="match_parent"
@@ -106,7 +132,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="center"
-                    android:text="yMin: " />
+                    android:text="yMin: "
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/yMin"
                     android:layout_width="match_parent"
@@ -120,7 +147,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="center"
-                    android:text="yMax: " />
+                    android:text="yMax: "
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/yMax"
                     android:layout_width="match_parent"
@@ -129,6 +157,13 @@
             </TableRow>
 
             <!-- z-Achse -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Z-Acceleration:"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
 
             <TableRow>
                 <com.github.mikephil.charting.charts.LineChart
@@ -144,7 +179,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="center"
-                    android:text="zMean: " />
+                    android:text="zMean: "
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/zMean"
                     android:layout_width="match_parent"
@@ -158,7 +194,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="center"
-                    android:text="zMin: " />
+                    android:text="zMin: "
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/zMin"
                     android:layout_width="match_parent"
@@ -172,13 +209,31 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="center"
-                    android:text="zMax: " />
+                    android:text="zMax: "
+                    android:textStyle="bold"/>
                 <TextView
                     android:id="@+id/zMax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="zMax" />
             </TableRow>
+
+            <TextView
+                android:id="@+id/pieText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time spend creating this app:"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/piechart"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" >
+
+
+            </com.github.mikephil.charting.charts.PieChart>
+
         </TableLayout>
     </ScrollView>
 </LinearLayout>
