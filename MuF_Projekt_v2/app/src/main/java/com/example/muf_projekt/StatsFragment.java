@@ -1,5 +1,6 @@
 package com.example.muf_projekt;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,13 +61,60 @@ public class StatsFragment extends Fragment {
         TextView zMean = view.findViewById(R.id.zMean);
         LineChart lc = view.findViewById(R.id.statsGraph);
 
+        ArrayList<Entry> x_accData;
+        ArrayList<Entry> y_accData;
+        ArrayList<Entry> z_accData;
+        ArrayList<ILineDataSet> dataSets;
+        int time_count = 0;
 
-        //List<AccelerationInformation> test = (List<AccelerationInformation>) database.getDatapointTable().getItemsAsLiveData();
+        float x_acc, y_acc, z_acc;
 
+        int cnt = 0;
+        // List<AccelerationInformation> test = (List<AccelerationInformation>) database.getDatapointTable().getItemsAsLiveData();
 
         database.getDatapointTable().getItemsAsLiveData().observe(this.getActivity(), accelerationInformation -> {
-            List<AccelerationInformation> test2 = accelerationInformation;
+            for(int i = 0; i<accelerationInformation.size();i++){
+                AccelerationInformation element = accelerationInformation.get(i);
+                /*
+                x_acc = element.getX();
+                y_acc = element.getY();
+                z_acc = element.getZ();
+
+
+                x_accTextView.setText(x_acc+"m/s^2");
+                y_accTextView.setText(y_acc+"m/s^2");
+                z_accTextView.setText(z_acc+"m/s^2");
+
+
+                x_accData.add(new Entry(time_count, x_acc));
+                y_accData.add(new Entry(time_count, y_acc));
+                z_accData.add(new Entry(time_count, z_acc));
+                time_count = time_count + 1;
+
+                LineDataSet x_lineDataSet = new LineDataSet(x_accData, "X-Acc");
+                LineDataSet y_lineDataSet = new LineDataSet(y_accData, "Y-Acc");
+                LineDataSet z_lineDataSet = new LineDataSet(z_accData, "Z-Acc");
+
+                x_lineDataSet.setColor(Color.RED);
+                y_lineDataSet.setColor(Color.BLUE);
+                z_lineDataSet.setColor(Color.GREEN);
+                x_lineDataSet.setDrawCircles(false);
+                y_lineDataSet.setDrawCircles(false);
+                z_lineDataSet.setDrawCircles(false);
+
+                dataSets = new ArrayList<>();
+                dataSets.add(x_lineDataSet);
+                dataSets.add(y_lineDataSet);
+                dataSets.add(z_lineDataSet);
+
+                LineData data = new LineData(dataSets);
+                lc.setData(data);
+                lc.invalidate();
+                */
+            }
         });
+
+
 
         /*
         List x = (List) database.getDatapointTable().getItemsAsLiveData();
