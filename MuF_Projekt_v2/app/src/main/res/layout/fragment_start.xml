@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="Sensor Data App"
             android:gravity="center"
-            android:layout_span="3"
+            android:layout_span="4"
             />
 
     </TableRow>
@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="START / STOP"
-            android:layout_span="3"
+            android:layout_span="4"
             />
     </TableRow>
 
@@ -46,10 +46,47 @@
             android:layout_height="match_parent"
             android:text="FEEDBACK"
             android:gravity="center"
-            android:layout_span="3"
+            android:layout_span="4"
             />
     </TableRow>
     <TableRow>
+        <TextView
+            android:id="@+id/leer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/x"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/y"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="y"
+            android:layout_weight="1"
+            android:gravity="center" />
+        <TextView
+            android:id="@+id/z"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="z"
+            android:layout_weight="1"
+            android:gravity="center" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/Live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Live: "
+            android:layout_weight="1"
+            android:gravity="right"
+            />
         <TextView
             android:id="@+id/x_accTextView"
             android:layout_width="wrap_content"
@@ -80,6 +117,14 @@
     </TableRow>
 
     <TableRow>
+        <TextView
+            android:id="@+id/Max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max: "
+            android:layout_weight="1"
+            android:gravity="right"
+            />
         <TextView
             android:id="@+id/x_max_accTextView"
             android:layout_width="wrap_content"
@@ -112,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="STATISTIKEN"
-            android:layout_span="3"
+            android:layout_span="4"
             />
     </TableRow>
 

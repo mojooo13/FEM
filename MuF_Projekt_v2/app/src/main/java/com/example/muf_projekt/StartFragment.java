@@ -14,9 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavHostController;
 import androidx.navigation.Navigation;
-import androidx.room.Room;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -28,7 +26,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StartFragment extends Fragment implements View.OnClickListener{
+public class StartFragment extends Fragment implements View.OnClickListener {
     private MainViewModel mainViewModel;
     private Observer<AccelerationInformation> observer;
     Button startstopButton;
@@ -93,12 +91,11 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.startstopButton:
-                if(isObserverRunning()){
+                if (isObserverRunning()) {
                     //Observer is running
                     startstopButton.setText("Messung starten");
                     startstopSensorObservation();
-                }
-                else{
+                } else {
                     //Observer is not running
                     startstopButton.setText("Messung beenden");
                     x_accData.clear();
@@ -115,8 +112,8 @@ public class StartFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void startstopSensorObservation(){
-        if(observer == null){
+    public void startstopSensorObservation() {
+        if (observer == null) {
             observer = (acclerationInformation) -> {
 
                 x_acc = acclerationInformation.getX();
@@ -124,9 +121,9 @@ public class StartFragment extends Fragment implements View.OnClickListener{
                 z_acc = acclerationInformation.getZ();
 
 
-                x_accTextView.setText(x_acc+"m/s^2");
-                y_accTextView.setText(y_acc+"m/s^2");
-                z_accTextView.setText(z_acc+"m/s^2");
+                x_accTextView.setText(Math.round(100.0 * x_acc) / 100.0 + "m/s^2");
+                y_accTextView.setText(Math.round(100.0 * y_acc) / 100.0 + "m/s^2");
+                z_accTextView.setText(Math.round(100.0 * z_acc) / 100.0 + "m/s^2");
 
                 x_accData.add(new Entry(time_count, x_acc));
                 y_accData.add(new Entry(time_count, y_acc));
@@ -157,23 +154,58 @@ public class StartFragment extends Fragment implements View.OnClickListener{
                 y_max_abs = Math.abs(y_acc);
                 z_max_abs = Math.abs(z_acc);
 
-                if(x_max_abs > x_max){
+                if (x_max_abs > x_max) {
                     x_max = x_max_abs;
-                    x_max_accTextView.setText(x_max_abs + " m/s^2");
+                    x_max_accTextView.setText(Math.round(100.0 * x_max_abs) / 100.0 + " m/s^2");
                 }
-                if(y_max_abs > y_max){
+                if (y_max_abs > y_max) {
                     y_max = y_max_abs;
-                    y_max_accTextView.setText(y_max_abs + " m/s^2");
+                    y_max_accTextView.setText(Math.round(100.0 * y_max_abs) / 100.0 + " m/s^2");
                 }
-                if(z_max_abs > z_max){
+                if (z_max_abs > z_max) {
                     z_max = z_max_abs;
-                    z_max_accTextView.setText(z_max_abs + " m/s^2");
-                }
-                else{
+                    z_max_accTextView.setText(Math.round(100.0 * z_max_abs) / 100.0 + " m/s^2");
+                } else {
                     //x_accTextView.setBackgroundColor(Color.WHITE);
                     //y_accTextView.setBackgroundColor(Color.WHITE);
                     //z_accTextView.setBackgroundColor(Color.WHITE);
                 }
+
+                // Threshold für Live-Feedback
+                // x-Axis
+                if(x_max_abs > 5)
+                {
+                    x_accTextView.setBackgroundColor(Color.rgb(255, 0, 0));
+                } else if (x_max_abs > 2) {
+                    x_accTextView.setBackgroundColor(Color.rgb(255, 255, 0));
+                }
+                else{
+                    x_accTextView.setBackgroundColor(Color.rgb(0, 255, 0));
+                }
+
+                // y-Axis
+                if(y_max_abs > 5)
+                {
+                    y_accTextView.setBackgroundColor(Color.rgb(255, 0, 0));
+                } else if (y_max_abs > 2) {
+                    y_accTextView.setBackgroundColor(Color.rgb(255, 255, 0));
+                }
+                else{
+                    y_accTextView.setBackgroundColor(Color.rgb(0, 255, 0));
+                }
+
+                // z-Axis
+                if(z_max_abs > 5)
+                {
+                    z_accTextView.setBackgroundColor(Color.rgb(255, 0, 0));
+                } else if (z_max_abs > 2) {
+                    z_accTextView.setBackgroundColor(Color.rgb(255, 255, 0));
+                }
+                else{
+                    z_accTextView.setBackgroundColor(Color.rgb(0, 255, 0));
+                }
+
+
 
                 //Datenbank
                 AccelerationInformation accelerationInformation = new AccelerationInformation(x_acc, y_acc, z_acc);
@@ -186,21 +218,20 @@ public class StartFragment extends Fragment implements View.OnClickListener{
                         database.getDatapointTable().insert(accelerationInformation);
                     }
                 });
-
-                 List<AccelerationInformation> pointList = database.getDatapointTable().getItems();
+                t.start();
+                List<AccelerationInformation> pointList = database.getDatapointTable().getItems();
 
             };
             mainViewModel.accelerationLiveData.observe(getViewLifecycleOwner(), observer);
 
-        }
-        else {
+        } else {
             mainViewModel.accelerationLiveData.removeObserver(observer);
             observer = null; // reset state
         }
     }
 
-    public boolean isObserverRunning(){
-        if(observer == null)
+    public boolean isObserverRunning() {
+        if (observer == null)
             return false;
         return true;
     }

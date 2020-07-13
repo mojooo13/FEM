@@ -6,71 +6,179 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-
-
-
-
+    <TextView
+        android:id="@+id/stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        android:layout_gravity="center"
+        android:gravity="center" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <LinearLayout
+        <TableLayout
+            android:id="@+id/appLayout"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:stretchColumns="*"
+            android:shrinkColumns="*">
 
-            <TextView
-                android:id="@+id/stats"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Test" />
-
-
+            <!-- x-Achse -->
+            <TableRow>
             <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/statsGraph"
+                android:id="@+id/statsGraphX"
                 android:layout_width="match_parent"
-                android:layout_height="300dp" />
+                android:layout_height="300dp"
+                android:layout_span="2" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/xMeanText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="xMean: " />
+                <TextView
+                    android:id="@+id/xMean"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="xMean" />
+            </TableRow>
+            <TableRow>
             <TextView
-                android:id="@+id/xMean"
+                android:id="@+id/xMinText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="xMean" />
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="xMin: " />
+            <TextView
+                android:id="@+id/xMin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="xMin" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/xMaxText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="xMax: " />
+                <TextView
+                    android:id="@+id/xMax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="xMax" />
+            </TableRow>
+
+            <!-- y-Achse -->
+
+            <TableRow>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/statsGraphY"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_span="2" />
+            </TableRow>
+            <TableRow>
+            <TextView
+                android:id="@+id/yMeanText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="yMean: " />
             <TextView
                 android:id="@+id/yMean"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="yMean" />
-            <TextView
-                android:id="@+id/zMean"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="zMean" />
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/yMinText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="yMin: " />
+                <TextView
+                    android:id="@+id/yMin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="yMin" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/yMaxText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="yMax: " />
+                <TextView
+                    android:id="@+id/yMax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="yMax" />
+            </TableRow>
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/statsGraph2"
-                android:layout_width="match_parent"
-                android:layout_height="300dp" />
+            <!-- z-Achse -->
 
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/statsGraph3"
-                android:layout_width="match_parent"
-                android:layout_height="300dp" />
-
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/statsGraph4"
-                android:layout_width="match_parent"
-                android:layout_height="300dp" />
-
-
-        </LinearLayout>
+            <TableRow>
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/statsGraphZ"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_span="2" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/zMeanText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="zMean: " />
+                <TextView
+                    android:id="@+id/zMean"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="zMean" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/zMinText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="zMin: " />
+                <TextView
+                    android:id="@+id/zMin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="zMin" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/zMaxText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="center"
+                    android:text="zMax: " />
+                <TextView
+                    android:id="@+id/zMax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="zMax" />
+            </TableRow>
+        </TableLayout>
     </ScrollView>
-
-
 </LinearLayout>

@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,10 +17,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class StatsFragment extends Fragment {
 
@@ -56,40 +51,61 @@ public class StatsFragment extends Fragment {
 
         // TODO:
         //ListView lv = view.findViewById(R.id.listMeasurements);
-        TextView xMean = view.findViewById(R.id.xMean);
-        TextView yMean = view.findViewById(R.id.yMean);
-        TextView zMean = view.findViewById(R.id.zMean);
-        LineChart lc = view.findViewById(R.id.statsGraph);
+        TextView xMeanLab = view.findViewById(R.id.xMean);
+        TextView yMeanLab = view.findViewById(R.id.yMean);
+        TextView zMeanLab = view.findViewById(R.id.zMean);
 
-        ArrayList<Entry> x_accData;
-        ArrayList<Entry> y_accData;
-        ArrayList<Entry> z_accData;
-        ArrayList<ILineDataSet> dataSets;
-        int time_count = 0;
+        TextView xMinLab = view.findViewById(R.id.xMin);
+        TextView yMinLab = view.findViewById(R.id.yMin);
+        TextView zMinLab = view.findViewById(R.id.zMin);
 
-        float x_acc, y_acc, z_acc;
+        TextView xMaxLab = view.findViewById(R.id.xMax);
+        TextView yMaxLab = view.findViewById(R.id.yMax);
+        TextView zMaxLab = view.findViewById(R.id.zMax);
 
-        int cnt = 0;
-        // List<AccelerationInformation> test = (List<AccelerationInformation>) database.getDatapointTable().getItemsAsLiveData();
+        LineChart lcX = view.findViewById(R.id.statsGraphX);
+        LineChart lcY = view.findViewById(R.id.statsGraphY);
+        LineChart lcZ = view.findViewById(R.id.statsGraphZ);
+
+
 
         database.getDatapointTable().getItemsAsLiveData().observe(this.getActivity(), accelerationInformation -> {
-            for(int i = 0; i<accelerationInformation.size();i++){
+            float x_acc, y_acc, z_acc;
+
+            float xMin = 0;
+            float xMax = 0;
+            float yMin = 0;
+            float yMax = 0;
+            float zMin = 0;
+            float zMax = 0;
+
+            float xMean = 0;
+            float yMean = 0;
+            float zMean = 0;
+
+            ArrayList<Entry> x_accData = new ArrayList<>();
+            ArrayList<Entry> y_accData = new ArrayList<>();
+            ArrayList<Entry> z_accData = new ArrayList<>();
+
+            ArrayList<ILineDataSet> dataSetX;
+            ArrayList<ILineDataSet> dataSetY;
+            ArrayList<ILineDataSet> dataSetZ;
+
+            int cnt = 0;
+
+            // TODO: Sortieren der Liste, um die richtige Reihenfolge zu bekommen für die Darstellung
+
+            for (int i = 0; i < accelerationInformation.size(); i++) {
+
                 AccelerationInformation element = accelerationInformation.get(i);
-                /*
+
                 x_acc = element.getX();
                 y_acc = element.getY();
                 z_acc = element.getZ();
 
-
-                x_accTextView.setText(x_acc+"m/s^2");
-                y_accTextView.setText(y_acc+"m/s^2");
-                z_accTextView.setText(z_acc+"m/s^2");
-
-
-                x_accData.add(new Entry(time_count, x_acc));
-                y_accData.add(new Entry(time_count, y_acc));
-                z_accData.add(new Entry(time_count, z_acc));
-                time_count = time_count + 1;
+                x_accData.add(new Entry(i, x_acc));
+                y_accData.add(new Entry(i, y_acc));
+                z_accData.add(new Entry(i, z_acc));
 
                 LineDataSet x_lineDataSet = new LineDataSet(x_accData, "X-Acc");
                 LineDataSet y_lineDataSet = new LineDataSet(y_accData, "Y-Acc");
@@ -102,29 +118,78 @@ public class StatsFragment extends Fragment {
                 y_lineDataSet.setDrawCircles(false);
                 z_lineDataSet.setDrawCircles(false);
 
-                dataSets = new ArrayList<>();
-                dataSets.add(x_lineDataSet);
-                dataSets.add(y_lineDataSet);
-                dataSets.add(z_lineDataSet);
+                dataSetX = new ArrayList<>();
+                dataSetY = new ArrayList<>();
+                dataSetZ = new ArrayList<>();
 
-                LineData data = new LineData(dataSets);
-                lc.setData(data);
-                lc.invalidate();
-                */
+                dataSetX.add(x_lineDataSet);
+                dataSetY.add(y_lineDataSet);
+                dataSetZ.add(z_lineDataSet);
+
+                LineData dataX = new LineData(dataSetX);
+                LineData dataY = new LineData(dataSetY);
+                LineData dataZ = new LineData(dataSetZ);
+
+                lcX.setData(dataX);
+                lcX.invalidate();
+                lcY.setData(dataY);
+                lcY.invalidate();
+                lcZ.setData(dataZ);
+                lcZ.invalidate();
+
+                // Calc Min / Max
+                // x-Axis
+                if (Math.abs(x_acc) < xMin){
+                    xMin = x_acc;
+
+                }
+                if (Math.abs(x_acc) > xMax){
+                    xMax = x_acc;
+                }
+
+                // y-Axis
+
+                if (Math.abs(y_acc) < yMin){
+                    yMin = y_acc;
+
+                }
+                if (Math.abs(y_acc) > yMax){
+                    yMax = y_acc;
+                }
+
+                // z-Axis
+
+                if (Math.abs(z_acc) < zMin){
+                    zMin = z_acc;
+
+                }
+                if (Math.abs(z_acc) > zMax){
+                    zMax = z_acc;
+                }
+
+                // Calc Mean
+                xMean = (xMean + x_acc) / (i+1);
+                yMean = (yMean + y_acc) / (i+1);
+                zMean = (zMean + z_acc) / (i+1);
+
             }
+            // Set Mean
+            xMeanLab.setText(String.valueOf(xMean*100) + " m/s^2");
+            yMeanLab.setText(String.valueOf(yMean*100) + " m/s^2");
+            zMeanLab.setText(String.valueOf(zMean*100) + " m/s^2");
+
+            // Set Min
+            xMinLab.setText(String.valueOf(xMin) + " m/s^2");
+            yMinLab.setText(String.valueOf(yMin) + " m/s^2");
+            zMinLab.setText(String.valueOf(zMin) + " m/s^2");
+
+            // Set Max
+            xMaxLab.setText(String.valueOf(xMax) + " m/s^2");
+            yMaxLab.setText(String.valueOf(yMax) + " m/s^2");
+            zMaxLab.setText(String.valueOf(zMax) + " m/s^2");
+
         });
 
-
-
-        /*
-        List x = (List) database.getDatapointTable().getItemsAsLiveData();
-        List<AccelerationInformation> test = (List<AccelerationInformation>) database.getDatapointTable().getItemsAsLiveData();
-
-        database.getDatapointTable().getItemsAsLiveData().observe(this.getActivity(), accelerationInformation -> {
-
-        });
-
-         */
     }
 
 }
