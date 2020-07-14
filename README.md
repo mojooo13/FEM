@@ -1,2 +1,12 @@
-# FEM
-Projekt Skistockteller FEM - Master Sports Technology Semester 2
+# Projekt SensorApp
+- Beschleunigungssensordaten einlesen
+- Live anzeigen lassen
+- Maximum anzeigen
+- Statistik Funktion
+- Datenbank
+- Linecharts
+- Animationen
+- Music Player
+- LiveData
+- Fragments
+- ...
