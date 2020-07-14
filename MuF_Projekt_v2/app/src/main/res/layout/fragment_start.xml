@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/appLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -166,5 +166,17 @@
             android:layout_span="4"
             />
     </TableRow>
+
+    <com.tomer.fadingtextview.FadingTextView
+        android:id="@+id/fadingTextView"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:texts="@array/example_one"
+        android:textSize="50dp"
+        app:timeout="1000"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:gravity="center"/>
+
 
 </TableLayout>

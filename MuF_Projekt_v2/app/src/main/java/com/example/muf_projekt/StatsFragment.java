@@ -43,7 +43,7 @@ public class StatsFragment extends Fragment {
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
-        pieChart.animateXY(5000, 5000);
+        pieChart.animateXY(10000, 10000);
         pieChart.setCenterTextColor(Color.BLACK);
         pieChart.invalidate();
 

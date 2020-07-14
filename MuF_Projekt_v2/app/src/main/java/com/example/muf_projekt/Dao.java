@@ -14,12 +14,6 @@ public interface Dao {
     @Insert
     public void insert(AccelerationInformation accelerationInformation);
 
-    @Update
-    public void update(AccelerationInformation accelerationInformation);
-
-    @Delete
-    public void delete(AccelerationInformation accelerationInformation);
-
     @Query("SELECT * FROM measurement_DB WHERE id = :id")
     public AccelerationInformation findById(String id);
 
@@ -34,7 +28,6 @@ public interface Dao {
 
     @Query("SELECT * FROM measurement_DB WHERE timestamp >= :start AND timestamp <= :stop")
     public List<AccelerationInformation> findByTimerange(long start, long stop);
-
 }
 
 

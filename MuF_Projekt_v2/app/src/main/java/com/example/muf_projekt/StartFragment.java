@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.tomer.fadingtextview.FadingTextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     TextView x_max_accTextView;
     TextView y_max_accTextView;
     TextView z_max_accTextView;
+    FadingTextView fadingTextView;
 
     MediaPlayer player = new MediaPlayer();
 
@@ -57,6 +59,10 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_start, container, false);
+
+        fadingTextView = (FadingTextView) view.findViewById(R.id.fadingTextView);
+        fadingTextView.setVisibility(View.INVISIBLE);
+        fadingTextView.stop();
 
         startstopButton = (Button) view.findViewById(R.id.startstopButton);
         startstopButton.setOnClickListener(this);
@@ -99,11 +105,15 @@ public class StartFragment extends Fragment implements View.OnClickListener {
                     //Observer is running
                     startstopButton.setText("Messung starten");
                     stopJeopardy();
+                    fadingTextView.setVisibility(View.INVISIBLE);
+                    fadingTextView.stop();
                     startstopSensorObservation();
                 } else {
                     //Observer is not running
                     startstopButton.setText("Messung beenden");
                     playJeopardy();
+                    fadingTextView.setVisibility(View.VISIBLE);
+                    fadingTextView.restart();
                     x_accData.clear();
                     y_accData.clear();
                     z_accData.clear();

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="example_one">
+        <item>Shake me...</item>
+        <item>like polaroid picture!</item>
+        <item>Shake it up!</item>
+        <item>Move on up!</item>
+        <item>Don\'t stop!</item>
+        <item>3...</item>
+        <item>2...</item>
+        <item>1...</item>
+        <item>Danke für deine Hilfe Patrick! (:</item>
+        <item>Danke für deine Hilfe Patrick! :D</item>
+        <item>;)</item>
+        <item>Und tschüss!</item>
+    </string-array>
+
+    <string-array name="motivation">my_res2</string-array>
+
+</resources>
