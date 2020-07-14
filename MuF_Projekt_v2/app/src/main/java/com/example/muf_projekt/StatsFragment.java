@@ -153,10 +153,10 @@ public class StatsFragment extends Fragment {
                 lcX.animateXY(3000,3000);
                 lcX.invalidate();
                 lcY.setData(dataY);
-                lcX.animateXY(3000,3000);
+                lcY.animateXY(3000,3000);
                 lcY.invalidate();
                 lcZ.setData(dataZ);
-                lcX.animateXY(3000,3000);
+                lcZ.animateXY(3000,3000);
                 lcZ.invalidate();
 
                 // Calc Min / Max
